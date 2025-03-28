@@ -18,6 +18,32 @@
     constexpr bool defaultA = false;
     constexpr bool defaultB = true;
     constexpr bool defaultC = false;
+    constexpr bool defaultTimed = false;
+
+
+    void run(){
+
+        int insertsAndQueries;
+        int limit;
+        int val;
+        
+        std::cin >> insertsAndQueries;
+        std::cin >> limit;
+
+        pfp::BitArray bitarray = pfp::BitArray(limit);
+
+        for(int i = 0; i < insertsAndQueries; ++i ){
+            std::cin >> val;
+            bitarray.set(val);
+        }
+
+        for(int i = 0; i < insertsAndQueries; ++i ){
+            std::cin >> val;
+            std::cout << bitarray.get(val) << std::endl;
+        }
+
+            
+    }
 
 
     int main(int argc, char const* argv[] ){
@@ -31,6 +57,7 @@
         bool abcSet = false;
         bool dataFileExists = false;
         std::string dataFile;
+        bool timed = defaultTimed;
 
 
 
@@ -82,7 +109,9 @@
                 aFlag = false;
                 bFlag = false;
                 cFlag = true;
-            } else{
+            } else if (s == "-t"){
+                timed = true;
+            }else{
                 if (s[0] == '-'){
                     std::cerr << "unknown argument!" << std::endl;
                     return -1;
@@ -97,6 +126,8 @@
                 dataFileExists = true;
             }
         }
+
+        run();
 
         return 0;
     }
